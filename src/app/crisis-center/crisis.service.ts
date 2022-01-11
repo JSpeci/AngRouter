@@ -20,6 +20,7 @@ export class CrisisService {
   getCrises() { return this.crises$; }
 
   getCrisis(id: number | string) {
+    alert("getCrisis")
     return this.getCrises().pipe(
       map(crises => crises.find(crisis => crisis.id === +id)!)
     );
