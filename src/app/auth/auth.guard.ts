@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, NavigationExtras, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
@@ -29,8 +29,17 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
     // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;
+    // Create a dummy session id
+    const sessionId = 123456789;
 
-    // Redirect to the login page
-    return this.router.parseUrl('/login');
+    // Set our navigation extras object
+    // that contains our global query params and fragment
+    const navigationExtras: NavigationExtras = {
+      queryParams: { session_id: sessionId },
+      fragment: 'anchor'
+    };
+
+    // Redirect to the login page with extras
+    return this.router.createUrlTree(['/login'], navigationExtras);
   }
 }
