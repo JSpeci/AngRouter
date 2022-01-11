@@ -4,6 +4,6 @@
     [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
   <a routerLink="./crises" routerLinkActive="active">Manage Crises</a>
   <a routerLink="./heroes" routerLinkActive="active">Manage Heroes</a>
-  <a routerLink="./heroes" routerLinkActive="active">Manage Heroes</a>
+  <button (click)=logout()>Logout</button>
 </nav>
 <router-outlet></router-outlet>

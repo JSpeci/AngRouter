@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -16,6 +16,12 @@ export class AuthGuard implements CanActivate {
     console.log('AuthGuard#canActivate called');
     const url: string = state.url;
     return this.checkLogin(url);
+  }
+
+  canActivateChild(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): true | UrlTree {
+    return this.canActivate(route, state);
   }
 
   checkLogin(url: string): true | UrlTree {
